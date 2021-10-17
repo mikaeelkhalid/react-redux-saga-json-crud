@@ -9,9 +9,9 @@ import {
   takeLatest,
   delay,
 } from 'redux-saga/effects';
-import * as types from './actionTypes';
+import * as types from '../redux/actionTypes';
 
-import { loadUserFailure, loadUserSuccess } from './actions';
+import { loadUserFailure, loadUserSuccess } from '../redux/actions';
 import { loadUsersApi } from '../api/userApi';
 
 function* onLoadUsersHandler() {
