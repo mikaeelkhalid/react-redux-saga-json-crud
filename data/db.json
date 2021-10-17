@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "mikaeel",
+      "email": "hello@gmail.com",
+      "phone": "1-770-736-8031",
+      "address": "pak"
+    }
+  ]
+}
