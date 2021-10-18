@@ -13,9 +13,7 @@ import {
 } from 'mdb-react-ui-kit';
 
 const Header = () => {
-  const [showNavColor, setShowNavColor] = useState(false);
   const [showNavColorSecond, setShowNavColorSecond] = useState(false);
-  const [showNavColorThird, setShowNavColorThird] = useState(false);
   return (
     <MDBNavbar expand='lg' dark bgColor='dark'>
       <MDBContainer fluid>
