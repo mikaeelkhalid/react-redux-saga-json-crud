@@ -13,12 +13,13 @@ import * as types from '../redux/actionTypes';
 
 import {
   createUserFailure,
-  createUserStart,
   createUserSuccess,
+  deleteUserFailure,
+  deleteUserSuccess,
   loadUserFailure,
   loadUserSuccess,
 } from '../redux/actions';
-import { loadUsersApi, createUserApi } from '../api/userApi';
+import { loadUsersApi, createUserApi, deleteUserApi } from '../api/userApi';
 
 function* onLoadUsersHandler() {
   try {
@@ -51,7 +52,30 @@ function* onCreateUserRequest() {
   yield takeLatest(types.CREATE_USER_START, onCreateUserHandler);
 }
 
-const userSagas = [fork(onLoadUsersRequest), fork(onCreateUserRequest)];
+function* onDeleteUserHandler(userID) {
+  try {
+    const response = yield call(deleteUserApi, userID);
+    if (response.status === 200) {
+      yield delay(500);
+      yield put(deleteUserSuccess(userID));
+    }
+  } catch (error) {
+    yield put(deleteUserFailure(error));
+  }
+}
+
+function* onDeleteUserRequest() {
+  while (true) {
+    const { payload: userID } = yield take(types.DELETE_USER_START);
+    yield call(onDeleteUserHandler, userID);
+  }
+}
+
+const userSagas = [
+  fork(onLoadUsersRequest),
+  fork(onCreateUserRequest),
+  fork(onDeleteUserRequest),
+];
 
 export default function* rootSagas() {
   yield all([...userSagas]);
