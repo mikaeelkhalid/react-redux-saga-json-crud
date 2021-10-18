@@ -8,9 +8,12 @@ import {
   MDBTooltip,
 } from 'mdb-react-ui-kit';
 
+import { useHistory } from 'react-router';
+
 import { Link } from 'react-router-dom';
 
 const DataTable = ({ users, handleDelete }) => {
+  const history = useHistory();
   return (
     <div className='container' style={{ marginTop: '150px' }}>
       <MDBTable>
@@ -24,60 +27,74 @@ const DataTable = ({ users, handleDelete }) => {
             <th scope='col'>Action</th>
           </tr>
         </MDBTableHead>
-        {users &&
-          users.map((user, index) => (
-            <MDBTableBody key={index}>
-              <tr>
-                <th scope='row'>{index + 1}</th>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.phone}</td>
-                <td>{user.address}</td>
-                <td>
-                  <MDBBtn
-                    className='m-1'
-                    tag='a'
-                    color='none'
-                    onClick={() => handleDelete(user.id)}
-                  >
-                    <MDBTooltip title='Delete' tag='a'>
-                      <MDBIcon
-                        fas
-                        icon='trash-alt'
-                        style={{ color: 'red', marginRight: '10px' }}
-                        size='md'
-                      ></MDBIcon>
-                    </MDBTooltip>
-                  </MDBBtn>
-                  <Link to={`/add-edit/${user.id}`}>
-                    <MDBTooltip title='Edit' tag='a'>
-                      <MDBIcon
-                        fas
-                        icon='pen'
-                        style={{
-                          color: 'blue',
-                          marginBottom: '10px',
-                          marginRight: '10px',
-                        }}
-                        size='md'
-                      ></MDBIcon>
-                    </MDBTooltip>
-                  </Link>
-                  <Link to={`/user-info/${user.id}`}>
-                    <MDBTooltip title='View' tag='a'>
-                      <MDBIcon
-                        fas
-                        icon='eye'
-                        style={{ color: 'green', marginBottom: '10px' }}
-                        size='md'
-                      ></MDBIcon>
-                    </MDBTooltip>
-                  </Link>
-                </td>
-              </tr>
-            </MDBTableBody>
-          ))}
+        {users.length > 0
+          ? users.map((user, index) => (
+              <MDBTableBody key={index}>
+                <tr>
+                  <th scope='row'>{index + 1}</th>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phone}</td>
+                  <td>{user.address}</td>
+                  <td>
+                    <MDBBtn
+                      className='m-1'
+                      tag='a'
+                      color='none'
+                      onClick={() => handleDelete(user.id)}
+                    >
+                      <MDBTooltip title='Delete' tag='a'>
+                        <MDBIcon
+                          fas
+                          icon='trash-alt'
+                          style={{ color: 'red', marginRight: '10px' }}
+                          size='md'
+                        ></MDBIcon>
+                      </MDBTooltip>
+                    </MDBBtn>
+                    <Link to={`/add-edit/${user.id}`}>
+                      <MDBTooltip title='Edit' tag='a'>
+                        <MDBIcon
+                          fas
+                          icon='pen'
+                          style={{
+                            color: 'blue',
+                            marginBottom: '10px',
+                            marginRight: '10px',
+                          }}
+                          size='md'
+                        ></MDBIcon>
+                      </MDBTooltip>
+                    </Link>
+                    <Link to={`/user-info/${user.id}`}>
+                      <MDBTooltip title='View' tag='a'>
+                        <MDBIcon
+                          fas
+                          icon='eye'
+                          style={{ color: 'green', marginBottom: '10px' }}
+                          size='md'
+                        ></MDBIcon>
+                      </MDBTooltip>
+                    </Link>
+                  </td>
+                </tr>
+              </MDBTableBody>
+            ))
+          : null}
       </MDBTable>
+
+      {users.length === 0 ? (
+        <div className='text-center'>
+          <p className='fs-2 fw-bold'>No data</p>
+          <MDBBtn
+            onClick={() => history.push('/add-user')}
+            color='primary'
+            type='submit'
+          >
+            Add
+          </MDBBtn>
+        </div>
+      ) : null}
     </div>
   );
 };
