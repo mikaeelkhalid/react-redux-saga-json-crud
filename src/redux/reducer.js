@@ -9,6 +9,7 @@ const initialState = {
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOAD_USER_START:
+    case types.CREATE_USER_START:
       return {
         ...state,
         isLoading: true,
@@ -19,7 +20,13 @@ export const userReducer = (state = initialState, action) => {
         isLoading: false,
         users: action.payload,
       };
+    case types.CREATE_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+      };
     case types.LOAD_USER_FAILURE:
+    case types.CREATE_USER_FAILURE:
       return {
         ...state,
         isLoading: false,
