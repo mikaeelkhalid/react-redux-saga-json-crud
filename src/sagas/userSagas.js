@@ -11,8 +11,14 @@ import {
 } from 'redux-saga/effects';
 import * as types from '../redux/actionTypes';
 
-import { loadUserFailure, loadUserSuccess } from '../redux/actions';
-import { loadUsersApi } from '../api/userApi';
+import {
+  createUserFailure,
+  createUserStart,
+  createUserSuccess,
+  loadUserFailure,
+  loadUserSuccess,
+} from '../redux/actions';
+import { loadUsersApi, createUserApi } from '../api/userApi';
 
 function* onLoadUsersHandler() {
   try {
@@ -30,7 +36,22 @@ function* onLoadUsersRequest() {
   yield takeLatest(types.LOAD_USER_START, onLoadUsersHandler);
 }
 
-const userSagas = [fork(onLoadUsersRequest)];
+function* onCreateUserHandler({ payload }) {
+  try {
+    const response = yield call(createUserApi, payload);
+    if (response.status === 200) {
+      yield put(createUserSuccess(response.data));
+    }
+  } catch (error) {
+    yield put(createUserFailure(error));
+  }
+}
+
+function* onCreateUserRequest() {
+  yield takeLatest(types.CREATE_USER_START, onCreateUserHandler);
+}
+
+const userSagas = [fork(onLoadUsersRequest), fork(onCreateUserRequest)];
 
 export default function* rootSagas() {
   yield all([...userSagas]);
