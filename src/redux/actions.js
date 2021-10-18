@@ -14,13 +14,13 @@ export const loadUserFailure = (error) => ({
   payload: error,
 });
 
-export const createUserStart = () => ({
+export const createUserStart = (user) => ({
   type: types.CREATE_USER_START,
+  payload: user,
 });
 
-export const createUserSuccess = (user) => ({
+export const createUserSuccess = () => ({
   type: types.CREATE_USER_SUCCESS,
-  payload: user,
 });
 
 export const createUserFailure = (error) => ({
