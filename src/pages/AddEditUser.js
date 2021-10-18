@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { MDBValidation, MDBInput, MDBBtn } from 'mdb-react-ui-kit';
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { createUserStart } from '../redux/actions';
 
 const initialState = {
   name: '',
@@ -14,9 +16,14 @@ const AddEditUser = () => {
   const { name, email, phone, address } = user;
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (name && email && phone && address) {
+      dispatch(createUserStart(user));
+      history.push('/');
+    }
   };
 
   const onInputChange = (e) => {
