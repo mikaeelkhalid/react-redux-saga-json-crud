@@ -1,18 +1,3 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "name": "mikaeel",
-      "email": "hello@gmail.com",
-      "phone": "1-770-736-8031",
-      "address": "pak"
-    },
-    {
-      "name": "Mikaeel Khalid",
-      "email": "test@email.com",
-      "phone": "22133",
-      "address": "pak",
-      "id": 2
-    }
-  ]
+  "users": []
 }
