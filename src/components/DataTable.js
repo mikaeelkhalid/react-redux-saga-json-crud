@@ -86,13 +86,9 @@ const DataTable = ({ users, handleDelete }) => {
       {users.length === 0 ? (
         <div className='text-center'>
           <p className='fs-2 fw-bold'>No data</p>
-          <MDBBtn
-            onClick={() => history.push('/add-user')}
-            color='primary'
-            type='submit'
-          >
-            Add
-          </MDBBtn>
+          <p>
+            Want to add contact? <a href='/add-user'> add! </a>
+          </p>
         </div>
       ) : null}
     </div>
