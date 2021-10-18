@@ -6,11 +6,15 @@ import UserInfo from './pages/UserInfo';
 import './App.css';
 import Header from './components/Header';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
   return (
     <Router>
       <div className='App'>
         <Header />
+        <ToastContainer />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/about' component={About} />
