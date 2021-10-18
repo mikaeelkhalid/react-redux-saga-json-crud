@@ -10,6 +10,7 @@ export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOAD_USER_START:
     case types.CREATE_USER_START:
+    case types.DELETE_USER_START:
       return {
         ...state,
         isLoading: true,
@@ -25,8 +26,15 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
       };
+    case types.DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        users: state.users.filter((user) => user.id !== action.payload),
+      };
     case types.LOAD_USER_FAILURE:
     case types.CREATE_USER_FAILURE:
+    case types.DELETE_USER_FAILURE:
       return {
         ...state,
         isLoading: false,
