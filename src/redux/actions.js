@@ -27,3 +27,18 @@ export const createUserFailure = (error) => ({
   type: types.CREATE_USER_FAILURE,
   payload: error,
 });
+
+export const deleteUserStart = (userID) => ({
+  type: types.DELETE_USER_START,
+  payload: userID,
+});
+
+export const deleteUserSuccess = (userID) => ({
+  type: types.DELETE_USER_SUCCESS,
+  payload: userID,
+});
+
+export const deleteUserFailure = (error) => ({
+  type: types.DELETE_USER_FAILURE,
+  payload: error,
+});
