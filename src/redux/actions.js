@@ -42,3 +42,17 @@ export const deleteUserFailure = (error) => ({
   type: types.DELETE_USER_FAILURE,
   payload: error,
 });
+
+export const updateUserStart = (userDetails) => ({
+  type: types.UPDATE_USER_START,
+  payload: userDetails,
+});
+
+export const updateUserSuccess = () => ({
+  type: types.UPDATE_USER_SUCCESS,
+});
+
+export const updateUserFailure = (error) => ({
+  type: types.UPDATE_USER_FAILURE,
+  payload: error,
+});
