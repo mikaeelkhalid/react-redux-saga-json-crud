@@ -18,8 +18,15 @@ import {
   deleteUserSuccess,
   loadUserFailure,
   loadUserSuccess,
+  updateUserFailure,
+  updateUserSuccess,
 } from '../redux/actions';
-import { loadUsersApi, createUserApi, deleteUserApi } from '../api/userApi';
+import {
+  loadUsersApi,
+  createUserApi,
+  deleteUserApi,
+  updateUserApi,
+} from '../api/userApi';
 
 function* onLoadUsersHandler() {
   try {
@@ -71,10 +78,28 @@ function* onDeleteUserRequest() {
   }
 }
 
+function* onUpdateUserHandler({ payload: { id, user } }) {
+  try {
+    const response = yield call(updateUserApi, id, user);
+    if (response.status === 200) {
+      yield delay(500);
+      yield put(updateUserSuccess());
+    }
+    //console.log(id, user);
+  } catch (error) {
+    yield put(updateUserFailure(error));
+  }
+}
+
+function* onUpdateUserRequest() {
+  yield takeLatest(types.UPDATE_USER_START, onUpdateUserHandler);
+}
+
 const userSagas = [
   fork(onLoadUsersRequest),
   fork(onCreateUserRequest),
   fork(onDeleteUserRequest),
+  fork(onUpdateUserRequest),
 ];
 
 export default function* rootSagas() {
