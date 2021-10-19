@@ -8,12 +8,9 @@ import {
   MDBTooltip,
 } from 'mdb-react-ui-kit';
 
-import { useHistory } from 'react-router';
-
 import { Link } from 'react-router-dom';
 
 const DataTable = ({ users, handleDelete }) => {
-  const history = useHistory();
   return (
     <div className='container' style={{ marginTop: '150px' }}>
       <MDBTable>
@@ -52,7 +49,7 @@ const DataTable = ({ users, handleDelete }) => {
                         ></MDBIcon>
                       </MDBTooltip>
                     </MDBBtn>
-                    <Link to={`/add-edit/${user.id}`}>
+                    <Link to={`/edit-user/${user.id}`}>
                       <MDBTooltip title='Edit' tag='a'>
                         <MDBIcon
                           fas
@@ -87,7 +84,7 @@ const DataTable = ({ users, handleDelete }) => {
         <div className='text-center'>
           <p className='fs-2 fw-bold'>No data</p>
           <p>
-            Want to add contact? <a href='/add-user'> add! </a>
+            Want to add contact? <a href='/add-user'>add</a>!
           </p>
         </div>
       ) : null}
