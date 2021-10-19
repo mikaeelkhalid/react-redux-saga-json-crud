@@ -10,11 +10,17 @@ import { toast } from 'react-toastify';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { users, isLoading } = useSelector((state) => state.users);
+  const { users, isLoading, error } = useSelector((state) => state.users);
 
   useEffect(() => {
     dispatch(loadUserStart());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   if (isLoading) {
     return (
