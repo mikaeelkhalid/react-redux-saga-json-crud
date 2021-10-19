@@ -11,6 +11,7 @@ export const userReducer = (state = initialState, action) => {
     case types.LOAD_USER_START:
     case types.CREATE_USER_START:
     case types.DELETE_USER_START:
+    case types.UPDATE_USER_START:
       return {
         ...state,
         isLoading: true,
@@ -22,6 +23,7 @@ export const userReducer = (state = initialState, action) => {
         users: action.payload,
       };
     case types.CREATE_USER_SUCCESS:
+    case types.UPDATE_USER_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -35,6 +37,7 @@ export const userReducer = (state = initialState, action) => {
     case types.LOAD_USER_FAILURE:
     case types.CREATE_USER_FAILURE:
     case types.DELETE_USER_FAILURE:
+    case types.UPDATE_USER_FAILURE:
       return {
         ...state,
         isLoading: false,
