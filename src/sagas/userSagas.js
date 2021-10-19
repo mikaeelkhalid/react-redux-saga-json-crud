@@ -4,11 +4,10 @@ import {
   all,
   put,
   fork,
-  cancel,
-  takeEvery,
   takeLatest,
   delay,
 } from 'redux-saga/effects';
+
 import * as types from '../redux/actionTypes';
 
 import {
@@ -21,6 +20,7 @@ import {
   updateUserFailure,
   updateUserSuccess,
 } from '../redux/actions';
+
 import {
   loadUsersApi,
   createUserApi,
@@ -28,6 +28,7 @@ import {
   updateUserApi,
 } from '../api/userApi';
 
+// load users
 function* onLoadUsersHandler() {
   try {
     const response = yield call(loadUsersApi);
@@ -43,7 +44,9 @@ function* onLoadUsersHandler() {
 function* onLoadUsersRequest() {
   yield takeLatest(types.LOAD_USER_START, onLoadUsersHandler);
 }
+// load users end
 
+// create user
 function* onCreateUserHandler({ payload }) {
   try {
     const response = yield call(createUserApi, payload);
@@ -58,7 +61,9 @@ function* onCreateUserHandler({ payload }) {
 function* onCreateUserRequest() {
   yield takeLatest(types.CREATE_USER_START, onCreateUserHandler);
 }
+// crete user end
 
+// delete user
 function* onDeleteUserHandler(userID) {
   try {
     const response = yield call(deleteUserApi, userID);
@@ -77,7 +82,9 @@ function* onDeleteUserRequest() {
     yield call(onDeleteUserHandler, userID);
   }
 }
+// delete user end
 
+// update user
 function* onUpdateUserHandler({ payload: { id, user } }) {
   try {
     const response = yield call(updateUserApi, id, user);
@@ -94,6 +101,7 @@ function* onUpdateUserHandler({ payload: { id, user } }) {
 function* onUpdateUserRequest() {
   yield takeLatest(types.UPDATE_USER_START, onUpdateUserHandler);
 }
+// update user end
 
 const userSagas = [
   fork(onLoadUsersRequest),
