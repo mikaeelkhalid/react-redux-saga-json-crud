@@ -1,6 +1,10 @@
-## Available Scripts
+## React redux, redux-saga json server crud
 
 In the project directory, you can run:
+
+### `npm i`
+
+Install all dependencies.
 
 ### `npm start`
 
